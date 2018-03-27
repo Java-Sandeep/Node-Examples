@@ -1,0 +1,68 @@
+Node.js EventEmitter:
+--------------------
+1. Node.js allows us to create and handle custom events easily by using
+  events module. Event module includes EventEmitter class which can be used
+  to raise and handle custom events.
+
+steps: -
+---------
+we first import the 'events' module and then create an object of EventEmitter
+class. We then specify event handler function using on() function. The on() method
+requires name of the event to handle and callback function which is called when
+an event is raised.
+
+The emit() function raises the specified event. First parameter is name of the
+event as a string and then arguments. An event can be emitted with zero or more
+arguments. You can specify any name for a custom event in the emit() function.
+
+
+------------------------------------------------------------------------------
+EventEmitter Methods	                         Description
+==================================================================
+emitter.addListener(event, listener)	==>  Adds a listener to the end of the listeners array for the
+                                        specified event. No checks are made to see if the listener has
+                                        already been added.
+
+emitter.on(event, listener)	       ==>  Adds a listener to the end of the listeners array for the
+                                        specified event. No checks are made to see if the listener has
+                                        already been added. It can also be called as an alias of
+                                        emitter.addListener()
+
+emitter.once(event, listener)	    ==>   Adds a one time listener for the event. This listener is
+                                        invoked only the next time the event is fired, after which it
+                                        is removed.
+
+emitter.removeListener(event, listener)	==>   Removes a listener from the listener array for the specified
+                                        event. Caution: changes array indices in the listener array
+                                        behind the listener.
+
+emitter.removeAllListeners([event])	 ==>   Removes all listeners, or those of the specified event.
+
+emitter.setMaxListeners(n)	     ==>        By default EventEmitters will print a warning if more than
+                                        10 listeners are added for a particular event.
+
+emitter.getMaxListeners()	        ==>      Returns the current maximum listener value for the emitter
+                                        which is either set by emitter.setMaxListeners(n) or defaults
+                                        to EventEmitter.defaultMaxListeners.
+
+emitter.listeners(event)	        ==>       Returns a copy of the array of listeners for the specified
+                                          event.
+
+emitter.emit(event[, arg1][, arg2][, ...])	==>    Raise the specified events with the supplied arguments.
+
+emitter.listenerCount(type)	     ==>       Returns the number of listeners listening to the type of event.
+
+==============================================================================================
+Common Patterns for EventEmitters:
+----------------------------------
+There are two common patterns that can be used to raise and bind an event using EventEmitter
+class in Node.js.
+
+    1.  Return EventEmitter from a function
+    2.  Extend the EventEmitter class
+
+Return EventEmitter from a function:
+-------------------------------------
+In this pattern, a constructor function returns an EventEmitter object, which was used to emit
+events inside a function. This EventEmitter object can be used to subscribe for the events. Consider
+the following example.
